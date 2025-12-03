@@ -177,6 +177,8 @@ export default function CharacterCanvas({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const text = "Gmic Grocky 🤎\n\nLook at my pfp made by the Rocky's Head pfp generator of @RockySeismic ✨\n\nTry it and make yours at : https://rocky-generator.vercel.app/\n\nRocky's Head on @SeismicSys 🔥";
+
     try {
       // Try to copy image to clipboard
       canvas.toBlob(async (blob: Blob | null) => {
@@ -191,15 +193,29 @@ export default function CharacterCanvas({
           }
         }
         
-        // Open X/Twitter
-        const text = "Gmic Grocky 🤎\n\nLook at my pfp made by the Rocky's Head pfp generator of @RockySeismic ✨\n\nTry it and make yours at : https://rocky-generator.vercel.app/\n\nRocky's Head on @SeismicSys 🔥";
-        const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
-        window.open(tweetUrl, '_blank');
+        // Detect if mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Open X/Twitter - try app first on mobile, then web
+        if (isMobile) {
+          // Try to open Twitter app
+          const twitterAppUrl = `twitter://post?message=${encodeURIComponent(text)}`;
+          window.location.href = twitterAppUrl;
+          
+          // Fallback to web after 1 second if app doesn't open
+          setTimeout(() => {
+            const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+            window.open(tweetUrl, '_blank');
+          }, 1000);
+        } else {
+          // Desktop - open in new tab
+          const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+          window.open(tweetUrl, '_blank');
+        }
       });
     } catch (err) {
       console.error("Share failed", err);
       // Still open X even if copy fails
-      const text = "Gmic Grocky 🤎\n\nLook at my pfp made by the Rocky's Head pfp generator of @RockySeismic ✨\n\nTry it and make yours at : https://rocky-generator.vercel.app/\n\nRocky's Head on @SeismicSys 🔥";
       const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
       window.open(tweetUrl, '_blank');
     }
