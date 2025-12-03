@@ -46,17 +46,36 @@ export default function CharacterCanvas({
     const drawLayers = async () => {
       // 1. Draw selected fond (background)
       const fondsId = selectedAccessories.fonds;
-      const selectedFond = fondsId
-        ? ACCESSORY_CATEGORIES.fonds.options.find((o) => o.id === fondsId)
-        : ACCESSORY_CATEGORIES.fonds.options[0]; // Default to first (base.jpg)
+      
+      // Check if it's an uploaded image (data URL) or a predefined option
+      let backgroundSrc = null;
+      if (fondsId) {
+        if (fondsId.startsWith('data:image/')) {
+          // It's an uploaded image
+          backgroundSrc = fondsId;
+        } else {
+          // It's a predefined option
+          const selectedFond = ACCESSORY_CATEGORIES.fonds.options.find((o) => o.id === fondsId);
+          if (selectedFond && selectedFond.type === "image") {
+            backgroundSrc = selectedFond.value;
+          }
+        }
+      } else {
+        // Default background
+        backgroundSrc = ACCESSORY_CATEGORIES.fonds.options[0].value;
+      }
 
-      if (selectedFond && selectedFond.type === "image") {
+      if (backgroundSrc) {
         const fondImg = new Image();
         fondImg.crossOrigin = "anonymous";
-        fondImg.src = selectedFond.value;
+        fondImg.src = backgroundSrc;
         await new Promise((resolve) => {
           fondImg.onload = () => {
             ctx.drawImage(fondImg, 0, 0, width, height);
+            resolve(null);
+          };
+          fondImg.onerror = () => {
+            console.error('Failed to load background image');
             resolve(null);
           };
         });
@@ -137,27 +156,52 @@ export default function CharacterCanvas({
     }
   };
 
-  const handleShare = async () => {
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [shareImageUrl, setShareImageUrl] = useState("");
+
+  const handleShare = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     try {
-      canvas.toBlob(async (blob: Blob | null) => {
-        if (!blob) return;
-        const file = new File([blob], "personnage.png", { type: "image/png" });
+      const imageUrl = canvas.toDataURL("image/png");
+      setShareImageUrl(imageUrl);
+      setShowShareModal(true);
+    } catch (err) {
+      console.error("Share failed", err);
+      alert("Unable to generate image for sharing.");
+    }
+  };
 
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({
-            title: "Mon Personnage",
-            text: "Regarde le personnage que j'ai créé !",
-            files: [file],
-          });
-        } else {
-          alert("Native sharing is not supported on this browser.");
+  const handleShareOnX = async () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    try {
+      // Try to copy image to clipboard
+      canvas.toBlob(async (blob: Blob | null) => {
+        if (blob) {
+          try {
+            await navigator.clipboard.write([
+              new ClipboardItem({ 'image/png': blob })
+            ]);
+            alert("Image copied to clipboard! You can now paste it on X/Twitter.");
+          } catch (clipboardErr) {
+            console.log("Clipboard copy failed, opening X anyway", clipboardErr);
+          }
         }
+        
+        // Open X/Twitter
+        const text = "Gmic Grocky 🤎\n\nLook at my pfp made by the Rocky's Head pfp generator of @RockySeismic ✨\n\nTry it and make yours at : https://rocky-generator.vercel.app/\n\nRocky's Head on @SeismicSys 🔥";
+        const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+        window.open(tweetUrl, '_blank');
       });
     } catch (err) {
       console.error("Share failed", err);
+      // Still open X even if copy fails
+      const text = "Gmic Grocky 🤎\n\nLook at my pfp made by the Rocky's Head pfp generator of @RockySeismic ✨\n\nTry it and make yours at : https://rocky-generator.vercel.app/\n\nRocky's Head on @SeismicSys 🔥";
+      const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      window.open(tweetUrl, '_blank');
     }
   };
 
@@ -210,7 +254,7 @@ export default function CharacterCanvas({
           <Button
             onClick={onReset}
             variant="outline"
-            className="bg-[#5A4A3A] border-[#5A4A3A] text-white hover:bg-[#6B5B4D] transition-all lg:rounded rounded-xl shadow-lg"
+            className="bg-[#5A4A3A] border-[#5A4A3A] text-white hover:bg-[#6B5B4D] transition-all rounded-xl shadow-lg"
             style={{
               width: "100%",
               padding: "min(1rem, 2vh) min(1.5rem, 2vw)",
@@ -230,7 +274,7 @@ export default function CharacterCanvas({
 
           <Button
             onClick={handleDownload}
-            className="bg-[#8B7355] text-white hover:bg-[#A68A6D] transition-all lg:rounded rounded-xl shadow-lg"
+            className="bg-[#8B7355] text-white hover:bg-[#A68A6D] transition-all rounded-xl shadow-lg"
             style={{
               width: "100%",
               padding: "min(1rem, 2vh) min(1.5rem, 2vw)",
@@ -252,7 +296,7 @@ export default function CharacterCanvas({
           <Button
             onClick={handleShare}
             variant="secondary"
-            className="bg-[#5A4A3A] text-white hover:bg-[#6B5B4D] transition-all lg:rounded rounded-xl shadow-lg"
+            className="bg-[#5A4A3A] text-white hover:bg-[#6B5B4D] transition-all rounded-xl shadow-lg"
             style={{
               width: "100%",
               padding: "min(1rem, 2vh) min(1.5rem, 2vw)",
@@ -271,6 +315,73 @@ export default function CharacterCanvas({
           </Button>
         </div>
       </div>
+
+      {/* Share Modal */}
+      {showShareModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+          onClick={() => setShowShareModal(false)}
+        >
+          <div 
+            className="bg-[#1E1917] rounded-3xl shadow-2xl border border-[#463832] p-6 max-w-2xl w-[90%] mx-4"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: "rgba(30, 25, 23, 0.95)",
+              backdropFilter: "blur(10px)",
+            }}
+          >
+            <h3 className="text-2xl font-bold text-[#D4C5B5] mb-4 text-center">
+              Share Your Rocky!
+            </h3>
+            
+            <div className="mb-4 rounded-xl overflow-hidden border border-[#463832] max-w-xs mx-auto">
+              <img 
+                src={shareImageUrl} 
+                alt="Your Rocky's head" 
+                className="w-full h-auto"
+              />
+            </div>
+
+            <div className="bg-[#2A2320] rounded-xl p-4 mb-4 border border-[#463832]">
+              <p className="text-[#D4C5B5] text-sm text-center whitespace-pre-line">
+                <span className="font-bold">Gmic Grocky 🤎</span>
+                {"\n\n"}
+                Look at my pfp made by the Rocky's Head pfp generator of{" "}
+                <span className="text-[#8B7355] font-semibold">@RockySeismic</span> ✨
+                {"\n\n"}
+                Try it and make yours at :{"\n"}
+                <span className="text-[#A68A6D]">https://rocky-generator.vercel.app/</span>
+                {"\n\n"}
+                Rocky's Head on <span className="text-[#8B7355] font-semibold">@SeismicSys</span> 🔥
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <Button
+                onClick={handleShareOnX}
+                className="flex-1 bg-[#1DA1F2] text-white hover:bg-[#1a8cd8] transition-all rounded-xl shadow-lg font-semibold"
+              >
+                <svg 
+                  className="w-5 h-5 mr-2" 
+                  fill="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                Share on X
+              </Button>
+              
+              <Button
+                onClick={() => setShowShareModal(false)}
+                variant="outline"
+                className="bg-[#5A4A3A] border-[#5A4A3A] text-white hover:bg-[#6B5B4D] transition-all rounded-xl shadow-lg"
+              >
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

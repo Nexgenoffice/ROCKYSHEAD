@@ -37,8 +37,8 @@ export default function CharacterCreator() {
   return (
     <div className="h-full w-full flex flex-col lg:justify-center items-center lg:overflow-hidden overflow-y-auto py-5">
       <h1
-        className="font-bold sm:text-6xl text-4xl lg:mb-5 lg:mt-0 mt-5 text-white"
-        // style={{ fontWeight: "bold", color: "#D4C5B5" }}
+        className="font-bold sm:text-6xl text-4xl lg:mb-5 lg:mt-0 mt-5"
+        style={{ color: "#D4C5B5" }}
       >
         ROCKY'S HEAD <br />
         GENERATOR
