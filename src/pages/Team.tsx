@@ -138,7 +138,7 @@ const Team = () => {
       id: 8, 
       name: 'ROH', 
       role: 'Team Member',
-      twitter: 'https://twitter.com/roh',
+      twitter: 'https://x.com/ROH_ETH',
       image: '/team/roh.png',
       description: 'Hello, I\'m ROH, just a random artist making bangers.' 
     },
