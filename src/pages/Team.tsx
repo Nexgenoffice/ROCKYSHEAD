@@ -175,13 +175,42 @@ const Team = () => {
       <ThemeToggle />
 
       {/* Mur de tags avec les membres de l'équipe */}
-      <div className="relative z-10 w-full h-full p-4 md:p-8 mt-16">
+      {/* Mobile: Grid layout */}
+      <div className="md:hidden relative z-10 w-full h-full overflow-y-auto pt-20 pb-8 px-4">
+        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+          {teamMembers.map((member) => (
+            <div
+              key={member.id}
+              className="relative aspect-square transition-all duration-300 hover:scale-105"
+              onClick={() => handleMemberClick(member)}
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-contain cursor-pointer"
+                style={{
+                  filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
+                  imageRendering: '-webkit-optimize-contrast',
+                }}
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm py-2 text-center">
+                <p className="text-white text-sm font-bold" style={{ fontFamily: "Gaegu, cursive" }}>
+                  {member.name}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop: Scattered layout */}
+      <div className="hidden md:block relative z-10 w-full h-full p-8 mt-16">
         {teamMembers.map((member, index) => {
           const position = tagPositions[index];
           return (
             <div
               key={member.id}
-              className="absolute w-40 h-40 sm:w-60 sm:h-60 md:w-80 md:h-80 transition-all duration-300"
+              className="absolute w-80 h-80 transition-all duration-300"
               style={{
                 top: position.top,
                 left: position.left,
