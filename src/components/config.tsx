@@ -37,6 +37,12 @@ export const ACCESSORY_CATEGORIES = {
       { id: "e15", type: "image", value: "/eyes/red.png", label: "Red" },
       { id: "e16", type: "image", value: "/eyes/ruby.png", label: "Ruby" },
       { id: "e17", type: "image", value: "/eyes/def.png", label: "Def" },
+      { id: "e18", type: "image", value: "/eyes/green_glow.png", label: "Green Glow" },
+      { id: "e19", type: "image", value: "/eyes/orange_glow.png", label: "Orange Glow" },
+      { id: "e20", type: "image", value: "/eyes/paper.png", label: "Paper" },
+      { id: "e21", type: "image", value: "/eyes/pink_glow.png", label: "Pink Glow" },
+      { id: "e22", type: "image", value: "/eyes/princess.png", label: "Princess" },
+      { id: "e23", type: "image", value: "/eyes/snake.png", label: "Snake" },
     ],
   },
   mouth: {
@@ -169,6 +175,8 @@ export const ACCESSORY_CATEGORIES = {
       },
       { id: "h19", type: "image", value: "/hair/xealist.png", label: "Xealist" },
       { id: "h20", type: "image", value: "/hair/volcano.png", label: "Volcano" },
+      { id: "h21", type: "image", value: "/hair/fries.png", label: "Fries" },
+      { id: "h22", type: "image", value: "/hair/mouss.png", label: "Mouss" },
     ],
   },
   badges: {

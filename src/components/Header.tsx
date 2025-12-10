@@ -91,21 +91,21 @@ const Header = () => {
               <Link
                 to="/pfp-generator"
                 className="block px-8 py-3 text-white text-lg font-semibold hover:bg-white/20 transition-all duration-200"
-                style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
+                style={{ fontFamily: "Gaegu, cursive" }}
               >
                 Pfp Generator
               </Link>
               <Link
                 to="/meme-generator"
                 className="block px-8 py-3 text-white text-lg font-semibold hover:bg-white/20 transition-all duration-200"
-                style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
+                style={{ fontFamily: "Gaegu, cursive" }}
               >
                 Meme Generator
               </Link>
               <Link
                 to="/rocky-game"
                 className="block px-8 py-3 text-white text-lg font-semibold hover:bg-white/20 transition-all duration-200"
-                style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
+                style={{ fontFamily: "Gaegu, cursive" }}
               >
                 Rocky Game
               </Link>
@@ -178,7 +178,7 @@ const Header = () => {
                   to="/pfp-generator"
                   onClick={closeMobileMenu}
                   className="text-white text-xl font-semibold"
-                  style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
+                  style={{ fontFamily: "Gaegu, cursive" }}
                 >
                   Pfp Generator
                 </Link>
@@ -186,7 +186,7 @@ const Header = () => {
                   to="/meme-generator"
                   onClick={closeMobileMenu}
                   className="text-white text-xl font-semibold"
-                  style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
+                  style={{ fontFamily: "Gaegu, cursive" }}
                 >
                   Meme Generator
                 </Link>
@@ -194,7 +194,7 @@ const Header = () => {
                   to="/rocky-game"
                   onClick={closeMobileMenu}
                   className="text-white text-xl font-semibold"
-                  style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
+                  style={{ fontFamily: "Gaegu, cursive" }}
                 >
                   Rocky Game
                 </Link>
