@@ -82,7 +82,7 @@ const Team = () => {
       id: 1, 
       name: 'Ash', 
       role: 'Co-founder',
-      twitter: 'https://twitter.com/ash',
+      twitter: 'https://x.com/0xAsh24',
       image: '/team/ash.png',
       description: 'I\'m Ash, co-founder of Rocky\'s Head. I love Satoru Gojo.'
     },
@@ -90,15 +90,15 @@ const Team = () => {
       id: 2, 
       name: 'Nexgen', 
       role: 'Founder',
-      twitter: 'https://twitter.com/nexgen',
+      twitter: 'https://x.com/nexgen_office',
       image: '/team/nex.png',
       description: 'Im Nexgen, founder of Rocky\'s Head, Let\'s Rocking Goooooo.' 
     },
     { 
       id: 3, 
-      name: 'Oxy', 
+      name: 'Oxy-Math', 
       role: 'Artist',
-      twitter: 'https://twitter.com/oxy',
+      twitter: 'https://x.com/Math_FTN74',
       image: '/team/oxy.png',
       description: 'French mag 9.0 by excellence. Still not sure how I got here, but I\'m having fun.' 
     },
@@ -106,23 +106,23 @@ const Team = () => {
       id: 4, 
       name: 'Isa', 
       role: 'Great Guide',
-      twitter: 'https://twitter.com/isa',
+      twitter: 'https://x.com/infoCryptoWeb3',
       image: '/team/isa.png',
       description: 'The Rocky\'s Head guide. Wisdom and cats.' 
     },
     { 
       id: 5, 
       name: 'Novasko', 
-      role: 'Community Team',
-      twitter: 'https://twitter.com/novasko',
+      role: 'Community Manager',
+      twitter: 'https://x.com/Novasko17',
       image: '/team/novasko.png',
       description: 'Hi I\'m Novasko, life is like a game, and I hate to lose.' 
     },
     { 
       id: 6, 
-      name: 'Novee', 
+      name: 'Novee (Kevindu93)', 
       role: 'Dev',
-      twitter: 'https://twitter.com/novee',
+      twitter: 'https://x.com/OgWxzz',
       image: '/team/novee.png',
       description: 'Just a random dev trying to make cool stuff. My code has bugs but I come from the 93.' 
     },
@@ -130,9 +130,9 @@ const Team = () => {
       id: 7, 
       name: 'Lele', 
       role: 'Artist',
-      twitter: 'https://twitter.com/lele',
+      twitter: 'https://x.com/RockySeismic',
       image: '/team/lele.png',
-      description: 'Hey I\'m Lele and I\'m an artist' 
+      description: 'Hey I\'m Lele and I\'m an artist. I love candies and cute things.' 
     },
     { 
       id: 8, 
@@ -140,7 +140,7 @@ const Team = () => {
       role: 'Team Member',
       twitter: 'https://twitter.com/roh',
       image: '/team/roh.png',
-      description: 'Hello, I\'m ROH, part of the Rocky\'s Head team.' 
+      description: 'Hello, I\'m ROH, just a random artist making bangers.' 
     },
   ];
 
