@@ -43,6 +43,16 @@ export const ACCESSORY_CATEGORIES = {
       { id: "e21", type: "image", value: "/eyes/pink_glow.png", label: "Pink Glow" },
       { id: "e22", type: "image", value: "/eyes/princess.png", label: "Princess" },
       { id: "e23", type: "image", value: "/eyes/snake.png", label: "Snake" },
+      { id: "e24", type: "image", value: "/eyes/btc_eyes.png", label: "BTC Eyes" },
+      { id: "e25", type: "image", value: "/eyes/eyes_hole.png", label: "Eyes Hole" },
+      { id: "e26", type: "image", value: "/eyes/glass_boss.png", label: "Glass Boss" },
+      { id: "e27", type: "image", value: "/eyes/glass_pink.png", label: "Glass Pink" },
+      { id: "e28", type: "image", value: "/eyes/glass_thug.png", label: "Glass Thug" },
+      { id: "e29", type: "image", value: "/eyes/hybrid_sp_ve.png", label: "Hybrid SP" },
+      { id: "e30", type: "image", value: "/eyes/monda.png", label: "Monda" },
+      { id: "e31", type: "image", value: "/eyes/sp_eyes.png", label: "SP Eyes" },
+      { id: "e32", type: "image", value: "/eyes/spider_eyes.png", label: "Spider Eyes" },
+      { id: "e33", type: "image", value: "/eyes/ve_eyes.png", label: "VE Eyes" },
     ],
   },
   mouth: {
@@ -113,6 +123,7 @@ export const ACCESSORY_CATEGORIES = {
         label: "Tire Langue",
       },
       { id: "m17", type: "image", value: "/Mouth/clown2.png", label: "Clown" },
+      { id: "m18", type: "image", value: "/Mouth/barb_noel.png", label: "Barbe Noël" },
     ],
   },
   hair: {
@@ -180,6 +191,10 @@ export const ACCESSORY_CATEGORIES = {
       { id: "h22", type: "image", value: "/hair/mouss.png", label: "Mouss" },
       { id: "h23", type: "image", value: "/hair/clown.png", label: "Clown" },
       { id: "h24", type: "image", value: "/hair/rabbit.png", label: "Rabbit" },
+      { id: "h25", type: "image", value: "/hair/bob.png", label: "Bob" },
+      { id: "h26", type: "image", value: "/hair/cap%20(2).png", label: "Cap 2" },
+      { id: "h27", type: "image", value: "/hair/holographic.png", label: "Holographic" },
+      { id: "h28", type: "image", value: "/hair/cornes.png", label: "Cornes" },
     ],
   },
   badges: {
@@ -483,6 +498,7 @@ export const ACCESSORY_CATEGORIES = {
         value: "/Clothes/princess.png",
         label: "Princess",
       },
+      { id: "c19", type: "image", value: "/Clothes/guirlande.png", label: "Guirlande" },
     ],
   },
   fonds: {
